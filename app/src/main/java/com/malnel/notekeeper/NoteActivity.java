@@ -129,7 +129,7 @@ public class NoteActivity extends AppCompatActivity {
     private void createNewNote() {
         DataManager dm = DataManager.getInstance();
         mNotePosition = dm.createNewNote();
-//        mNote = dm.getNotes().get(mNotePosition);
+        mNote = dm.getNotes().get(mNotePosition);
     }
 
     @Override
