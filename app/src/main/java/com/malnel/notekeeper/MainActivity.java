@@ -2,31 +2,26 @@ package com.malnel.notekeeper;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -38,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private LinearLayoutManager mNotesLayoutManager;
     private CourseRecyclerAdapter mCourseRecyclerAdapter;
     private GridLayoutManager mCoursesLayoutManager;
+    private static boolean isCoursesSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +83,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         List<CourseInfo> courses = DataManager.getInstance().getCourses();
         mCourseRecyclerAdapter = new CourseRecyclerAdapter(this, courses);
 
-        displayNotes();
+        if (isCoursesSelected) {
+            displayCourses();
+        } else {
+            displayNotes();
+        }
     }
 
     private void displayNotes() {
@@ -119,8 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
 
         if (id == R.id.nav_notes) {
+            isCoursesSelected = false;
             displayNotes();
         } else if (id == R.id.nav_courses) {
+            isCoursesSelected = true;
             displayCourses();
         } else if (id == R.id.nav_share) {
             handleSelection(R.string.nav_share_message);
