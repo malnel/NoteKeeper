@@ -20,4 +20,16 @@
     <string name="note_text_hint">Note text</string>
     <string name="nav_share_message">Share</string>
     <string name="nav_send_message">Send</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="general_header">General</string>
+    <string name="social_header">Social</string>
+
+    <!-- General Preferences -->
+    <string name="user_email_address">Your email address</string>
+    <string name="user_name">Your name</string>
+
+    <!-- Social Preferences -->
+    <string name="favorite_social">Favorite network</string>
 </resources>
